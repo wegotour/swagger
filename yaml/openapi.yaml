@@ -1,0 +1,332 @@
+openapi: 3.0.3
+info:
+  title: Dokumen API Cloud Function - OpenAPI 3.0
+  description: |-
+    Ini adalah contoh dokumentasi API menggunakan OpenAPI 3.0 dan Swagger UI. Disini dibuatkan dokumentasi API untuk aplikasi Wegotour yang dibuat menggunakan Go-lang dan Cloud Function.
+
+    Untuk informasi lebih lanjut, kunjungi website kami di [Website Wegotour](https://wegotour.github.io/).
+
+  termsOfService: https://github.com/wegotour/swagger
+  contact:
+    email: daffaaudyapramana03@gmail.com
+  license:
+    name: Wegotour Package
+    url: https://pkg.go.dev/github.com/wegotour/be_p3
+  version: 0.0.4
+externalDocs:
+  description: Repo GCF
+  url: https://wegotour.github.io/cloudfunction_wegotour/
+servers:
+  - url: https://asia-southeast2-wegotour-403712.cloudfunctions.net/
+tags:
+  - name: user
+    description: Data User
+  - name: Auth
+    description: Auth to Access to API
+  - name: Ticket
+    description: Data Ticket
+
+paths:
+  /wegotour:
+    get:
+      tags:
+        - User
+      summary: Get all users
+      description: Get semua user
+      operationId: getAllUsers
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+  /wegotour-GetUserByUsername:
+    get:
+      tags:
+        - User
+      summary: Get user by username
+      description: Get user berdasarkan username
+      operationId: getUserByUsername
+      parameters:
+        - name: username
+          in: path
+          description: 'Masukkan username yang terdaftar.'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'          
+        '400':
+          description: Invalid username supplied
+        '404':
+          description: User not found
+
+  /wegotour-register:
+    post:
+      tags:
+        - User
+      summary: Register User
+      description: Register User
+      operationId: registerUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '405':
+          description: Invalid input
+
+  /wegotour-updateUser:
+    put:
+      tags:
+        - User
+      summary: Update User
+      description: Update User
+      operationId: updateUser
+      parameters:
+        - name: ID
+          in: path
+          description: 'Masukkan ID user yang ingin di update.'
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '405':
+          description: Invalid input
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+
+
+  /wegotour-changepass:
+    put:
+      tags:
+        - User
+      summary: Change Password
+      description: Change Password
+      operationId: changePassword
+      parameters:
+        - name: username
+          in: path
+          description: 'Masukkan username user yang ingin di ganti passwordnya.'
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '405':
+          description: Invalid input
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+
+  /wegotour-deleteuser:
+    delete:
+      tags:
+        - User
+      summary: Delete User
+      description: Delete User
+      operationId: deleteUser
+      parameters:
+        - name: username
+          in: path
+          description: 'Masukkan username yang ingin di hapus.'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '405':
+          description: Invalid input
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+
+  /wegotour-login:
+    post:
+      tags:
+        - Auth
+      summary: Login get Token
+      description: Login and Get User Token
+      operationId: authService
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Auth'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '405':
+          description: Invalid input
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+
+  /wegotour-post/ticket:
+    post:
+      tags:
+        - Ticket
+      summary: Post Ticket
+      description: Insert Ticket
+      operationId: InsertTicket
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ticket'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '405':
+          description: Invalid input
+      security:
+        - token:
+            - write:apiKey
+            - read:apiKey
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        email:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        role:
+          type: string
+          example: user
+
+    UserResponse:
+      type: object
+      properties:
+        status:
+          type: bool
+          example: false
+        message:
+          type: string
+          example: fakguh
+        data:
+          type: object
+          properties:
+            email:
+              type: string
+            username:
+              type: string
+            password:
+              type: string
+            role:
+              type: string
+
+    Ticket:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        isdone:
+          type: bool
+          example: true
+
+    Auth:
+      type: object
+      properties:
+        username:
+          type: string
+          example: dapskut
+        password:
+          type: string
+          example: kepodah
+
+    AuthResponse:
+      type: object
+      properties:
+        status:
+          type: bool
+          example: false
+        message:
+          type: string
+          example: fakguh
+        token:
+          type: string
+          example: fakguh
+
+  requestBodies:
+    AuthReq:
+      description: Request Authentication
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Auth'
+
+    UserArray:
+      description: List of user object
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/AuthResponse'
+
+  securitySchemes:
+    token:
+      type: apiKey
+      name: token
+      in: header
