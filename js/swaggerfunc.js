@@ -4,7 +4,7 @@ import SwaggerUIStandalonePreset from 'https://cdn.skypack.dev/swagger-ui-dist/s
 export let URLData = "./yaml/openapi.yaml";
 
 export const UIData = SwaggerUIBundle({
-    url: URLData, //Location of Open API spec in the repo
+    url: URLData, //Location of Open API spec in the repos
     dom_id: '#swagger-ui',
     deepLinking: true,
     presets: [
