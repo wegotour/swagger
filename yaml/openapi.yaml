@@ -68,7 +68,7 @@ paths:
         '404':
           description: User not found
 
-  /wegotour-register:
+  /wegotour-registeruser:
     post:
       tags:
         - User
@@ -124,7 +124,7 @@ paths:
             - read:apiKey
 
 
-  /wegotour-changepass:
+  /wegotourchangepassworduser:
     put:
       tags:
         - User
@@ -157,17 +157,17 @@ paths:
             - write:apiKey
             - read:apiKey
 
-  /wegotour-deleteuser:
+  /wegotour-deletedataticket:
     delete:
       tags:
-        - User
-      summary: Delete User
-      description: Delete User
-      operationId: deleteUser
+        - Ticket
+      summary: Delete Ticket
+      description: Delete Ticket
+      operationId: deleteTicket
       parameters:
-        - name: username
+        - name: ticket
           in: path
-          description: 'Masukkan username yang ingin di hapus.'
+          description: 'Masukkan ticket yang ingin di hapus.'
           required: true
           schema:
             type: string
@@ -177,7 +177,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserResponse'
+                $ref: '#/components/schemas/TicketResponse'
         '405':
           description: Invalid input
       security:
@@ -185,7 +185,7 @@ paths:
             - write:apiKey
             - read:apiKey
 
-  /wegotour-login:
+  /wegotourloginadminbaru:
     post:
       tags:
         - Auth
@@ -211,7 +211,7 @@ paths:
             - write:apiKey
             - read:apiKey
 
-  /wegotour-post/ticket:
+  /insertdataticket:
     post:
       tags:
         - Ticket
