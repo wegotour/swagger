@@ -352,8 +352,8 @@ components:
       type: object
       properties:
         status:
-          type: boolean
-          example: true
+          type: bool
+          example: false
         message:
           type: string
           example: Selamat Datang 
@@ -369,14 +369,14 @@ components:
           schema:
             $ref: '#/components/schemas/auth'
 
-    # UserArray:
-    #   description: List of user object
-    #   content:
-    #     application/json:
-    #       schema:
-    #         type: array
-    #         items:
-    #           $ref: '#/components/schemas/AuthResponse'
+    UserArray:
+      description: List of user object
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/LoginResponse'
 
   securitySchemes:
     token:
