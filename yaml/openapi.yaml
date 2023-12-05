@@ -80,7 +80,7 @@ paths:
         '404':
           description: User not found
 
-  /wegotour-registeruser:
+  /wegotour-registeradmin:
     post:
       tags:
         - register
@@ -139,7 +139,7 @@ paths:
   /wegotourchangepassworduser:
     put:
       tags:
-        - User
+        - update
       summary: Change Password
       description: Change Password
       operationId: authService
