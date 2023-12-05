@@ -377,7 +377,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Auth'
+            $ref: '#/components/schemas/auth'
 
     # UserArray:
     #   description: List of user object
