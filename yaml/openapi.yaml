@@ -81,7 +81,7 @@ paths:
         - register
       summary: Register User
       description: Register User
-      operationId: registerUser
+      operationId: authService
       requestBody:
         content:
           application/json:
@@ -103,7 +103,7 @@ paths:
         - update
       summary: Update User
       description: Update User
-      operationId: updateUser
+      operationId: authService
       parameters:
         - name: ID
           in: path
@@ -126,9 +126,9 @@ paths:
         '405':
           description: Invalid input
       security:
-        - token:
-            - write:apiKey
-            - read:apiKey
+        - Login:
+          - write:apiKey
+          - read:apiKey
 
 
   /wegotourchangepassworduser:
@@ -137,7 +137,7 @@ paths:
         - User
       summary: Change Password
       description: Change Password
-      operationId: changePassword
+      operationId: authService
       parameters:
         - name: username
           in: path
@@ -160,9 +160,9 @@ paths:
         '405':
           description: Invalid input
       security:
-        - token:
-            - write:apiKey
-            - read:apiKey
+        - Login:
+          - write:apiKey
+          - read:apiKey
 
   /wegotour-deletedataticket:
     delete:
@@ -170,7 +170,7 @@ paths:
         - Ticket
       summary: Delete Ticket
       description: Delete Ticket
-      operationId: deleteTicket
+      operationId: authService
       parameters:
         - name: ticket
           in: path
@@ -188,9 +188,9 @@ paths:
         '405':
           description: Invalid input
       security:
-        - token:
-            - write:apiKey
-            - read:apiKey
+        - Login:
+          - write:apiKey
+          - read:apiKey
 
   /wegotourloginadminbaru:
     post:
@@ -203,7 +203,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Login'
+              $ref: '#/components/schemas/Auth'
       responses:
         '200':
           description: successful operation
@@ -213,6 +213,10 @@ paths:
                 $ref: '#/components/schemas/AuthResponse'
         '405':
           description: Invalid input
+      security:
+        - Login:
+          - write:apiKey
+          - read:apiKey
 
   /insertdataticket:
     post:
@@ -220,7 +224,7 @@ paths:
         - Ticket
       summary: Post Ticket
       description: Insert Ticket
-      operationId: InsertTicket
+      operationId: authService
       requestBody:
         content:
           application/json:
@@ -236,9 +240,10 @@ paths:
         '405':
           description: Invalid input
       security:
-        - token:
-            - write:apiKey
-            - read:apiKey
+        - Login:
+          - write:apiKey
+          - read:apiKey
+
 components:
   schemas:
     User:
@@ -331,7 +336,7 @@ components:
           type: string
           example: successful operation
 
-    Login:
+    Auth:
       type: object
       properties:
         username:
@@ -360,7 +365,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Login'
+            $ref: '#/components/schemas/Auth'
 
     UserArray:
       description: List of user object
@@ -372,7 +377,7 @@ components:
               $ref: '#/components/schemas/AuthResponse'
 
   securitySchemes:
-    token:
+    Login:
       type: apiKey
-      name: token
+      name: Login
       in: header
