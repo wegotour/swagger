@@ -344,6 +344,9 @@ components:
         password:
           type: string
           example: picaw
+        token:
+          type: string
+          exammple: v4.public.eyJleHAiOiIyMDIzLTEyLTA1VDEyOjA5OjI1WiIsImlhdCI6IjIwMjMtMTItMDVUMTA6MDk6MjVaIiwiaWQiOiJwcmlzeWFoYXVyYUBnbWFpbC5jb20iLCJuYmYiOiIyMDIzLTEyLTA1VDEwOjA5OjI1WiJ9t-XA1NevzqqnyKoFtNc9XK7P08H5QKuZ8JnstB8LsuRMlz1wTNIUfqG3gTvARhqq_1zgxxu872h-vQHisYLqCQ
 
     LoginResponse:
       type: object
