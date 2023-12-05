@@ -4,7 +4,7 @@ info:
   description: |-
     Ini adalah contoh dokumentasi API menggunakan OpenAPI 3.0 dan Swagger UI. Disini dibuatkan dokumentasi API untuk aplikasi Wegotour yang dibuat menggunakan Go-lang dan Cloud Function.
 
-    Untuk informasi lebih lanjut, kunjungi website kami di [Website Wegotour](https://wegotour.github.io/).
+    Untuk informasi lebih lanjut, kunjungi website kami di [Website Wegotour](https://wegotour.my.id/).
 
   termsOfService: https://github.com/wegotour/swagger
   contact:
@@ -19,50 +19,57 @@ externalDocs:
 servers:
   - url: https://asia-southeast2-wegotour-403712.cloudfunctions.net/
 tags:
-  - name: user
-    description: Data User
-  - name: Auth
-    description: Auth to Access to API
-  - name: Ticket
-    description: Data Ticket
+  - name: auth
+    description: Authentikasi
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://github.com/wegotour/PasetoBackend
+  - name: register
+    description: Register Account
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://github.com/wegotour/PasetoBackend
+  - name: data
+    description: Data Untuk akses GIS
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://github.com/wegotour/PasetoBackend
+  - name: update
+    description: Update Data
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://github.com/wegotour/PasetoBackend
 
 paths:
   /wegotour:
     get:
       tags:
-        - User
-      summary: Get all users
-      description: Get semua user
-      operationId: getAllUsers
+        - data
+      summary: Get all ticket
+      description: Get All Ticket
+      operationId: getAllTicket
       responses:
         '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/GetTicketResponse'
 
-  /wegotour-GetUserByUsername:
+  /wegotourgetalluser:
     get:
       tags:
-        - User
-      summary: Get user by username
-      description: Get user berdasarkan username
-      operationId: getUserByUsername
-      parameters:
-        - name: username
-          in: path
-          description: 'Masukkan username yang terdaftar.'
-          required: true
-          schema:
-            type: string
+        - data
+      summary: Get all user
+      description: Header Auth
+      operationId: getdataallUser
       responses:
         '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'          
+                $ref: '#/components/schemas/GetAllDataResponse'          
         '400':
           description: Invalid username supplied
         '404':
@@ -71,7 +78,7 @@ paths:
   /wegotour-registeruser:
     post:
       tags:
-        - User
+        - register
       summary: Register User
       description: Register User
       operationId: registerUser
@@ -86,14 +93,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserResponse'
+                $ref: '#/components/schemas/RegisterResponse'
         '405':
           description: Invalid input
 
   /wegotour-updateUser:
     put:
       tags:
-        - User
+        - update
       summary: Update User
       description: Update User
       operationId: updateUser
@@ -115,7 +122,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserResponse'
+                $ref: '#/components/schemas/UpdatePenggunaResponse'
         '405':
           description: Invalid input
       security:
@@ -149,7 +156,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserResponse'
+                $ref: '#/components/schemas/ChangePassResponse'
         '405':
           description: Invalid input
       security:
@@ -188,7 +195,7 @@ paths:
   /wegotourloginadminbaru:
     post:
       tags:
-        - Auth
+        - auth
       summary: Login get Token
       description: Login and Get User Token
       operationId: authService
@@ -196,14 +203,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Auth'
+              $ref: '#/components/schemas/Login'
       responses:
         '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AuthResponse'
+                $ref: '#/components/schemas/LoginResponse'
         '405':
           description: Invalid input
       security:
@@ -229,7 +236,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AuthResponse'
+                $ref: '#/components/schemas/InsertDataResponse'
         '405':
           description: Invalid input
       security:
@@ -247,66 +254,122 @@ components:
           type: string
         password:
           type: string
-        role:
-          type: string
-          example: user
 
-    UserResponse:
+    GetTicketResponse:
       type: object
       properties:
         status:
-          type: bool
-          example: false
+          type: boolean
+          example: true
         message:
           type: string
-          example: fakguh
+          example: berhasil ambil data
         data:
-          type: object
-          properties:
-            email:
-              type: string
-            username:
-              type: string
-            password:
-              type: string
-            role:
-              type: string
+          $ref: "#/components/schemas/Tiket"
+
+    GetAllDataResponse:
+      type: object
+      properties:
+        status:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: berhasil ambil data
+        data:
+          $ref: "#/components/schemas/Login"
+
+    UpdatePenggunaResponse:
+      type: object
+      properties:
+        status:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: successful operation
+
+    LoginResponse:
+      type: object
+      properties:
+        status:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: selamat datang
+        token:
+          type: string
+          example: "example_token"
+
+    RegisterResponse:
+      type: object
+      properties:
+        status:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: user berhasil terdaftar
 
     Ticket:
       type: object
       properties:
-        id:
+        nomomrid:
           type: string
+          example: 20
         title:
           type: string
+          example: Gunung Rinjani
         description:
           type: string
-        isdone:
-          type: bool
-          example: true
+          example: Gunungnya ada di Lombok
+        image:
+          type: string
+          example: https://images3.alphacoders.com/165/thumb-1920-165265.jpg
 
-    Auth:
+    InsertDataResponse:
+      type: object
+      properties:
+        status:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: successful operation
+
+    ChangePassResponse:
+      type: object
+      properties:
+        status:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: successful operation
+
+    Login:
       type: object
       properties:
         username:
           type: string
-          example: dapskut
+          example: prisyahaura@gmail.com
         password:
           type: string
-          example: kepodah
+          example: picaw
 
-    AuthResponse:
+    LoginResponse:
       type: object
       properties:
         status:
-          type: bool
-          example: false
+          type: boolean
+          example: true
         message:
           type: string
-          example: fakguh
+          example: Selamat Datang 
         token:
           type: string
-          example: fakguh
+          example: "example_token"
 
   requestBodies:
     AuthReq:
@@ -316,14 +379,14 @@ components:
           schema:
             $ref: '#/components/schemas/Auth'
 
-    UserArray:
-      description: List of user object
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/AuthResponse'
+    # UserArray:
+    #   description: List of user object
+    #   content:
+    #     application/json:
+    #       schema:
+    #         type: array
+    #         items:
+    #           $ref: '#/components/schemas/AuthResponse'
 
   securitySchemes:
     token:
