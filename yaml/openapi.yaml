@@ -289,19 +289,6 @@ components:
           type: string
           example: successful operation
 
-    LoginResponse:
-      type: object
-      properties:
-        status:
-          type: boolean
-          example: true
-        message:
-          type: string
-          example: selamat datang
-        token:
-          type: string
-          example: "example_token"
-
     RegisterResponse:
       type: object
       properties:
