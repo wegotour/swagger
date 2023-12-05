@@ -30,12 +30,17 @@ tags:
       description: Deskripsi dan Kode Program
       url: https://github.com/wegotour/PasetoBackend
   - name: data
-    description: Data Untuk akses GIS
+    description: Data Untuk akses user
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://github.com/wegotour/PasetoBackend
   - name: update
     description: Update Data
+    externalDocs:
+      description: Deskripsi dan Kode Program
+      url: https://github.com/wegotour/PasetoBackend
+  - delete: delete
+    description: Delete Data
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://github.com/wegotour/PasetoBackend
@@ -167,7 +172,7 @@ paths:
   /wegotour-deletedataticket:
     delete:
       tags:
-        - Ticket
+        - Delete
       summary: Delete Ticket
       description: Delete Ticket
       operationId: authService
@@ -184,7 +189,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TicketResponse'
+                $ref: '#/components/schemas/GetTicketResponse'
         '405':
           description: Invalid input
       security:
@@ -266,7 +271,7 @@ components:
           type: string
           example: berhasil ambil data
         data:
-          $ref: "#/components/schemas/Tiket"
+          $ref: "#/components/schemas/Login"
 
     GetAllDataResponse:
       type: object
@@ -339,7 +344,7 @@ components:
     Auth:
       type: object
       properties:
-        username:
+        email:
           type: string
           example: prisyahaura@gmail.com
         password:
