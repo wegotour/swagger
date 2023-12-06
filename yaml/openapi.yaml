@@ -59,6 +59,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetTicketResponse'
+        '405':
+          description: Invalid input
+      security:
+        - Login:
+          - write:apiKey
+          - read:apiKey
   /wegotourgetalluser:
     get:
       tags:
@@ -225,8 +231,6 @@ components:
         message:
           type: string
           example: berhasil ambil data
-        data:
-          $ref: "#/components/schemas/Auth"
     GetAllDataResponse:
       type: object
       properties:
@@ -270,7 +274,7 @@ components:
           example: Gunungnya ada di Lombok
         image:
           type: string
-          example: https://images3.alphacoders.com/165/thumb-1920-165265.jpg
+          example: https://unsplash.it/1200/900?random
     DeleteTicketResponse:
       type: object
       properties:
