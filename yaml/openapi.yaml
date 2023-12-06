@@ -46,7 +46,6 @@ tags:
       url: https://github.com/wegotour/PasetoBackend
 
 paths:
-
   /wegotour:
     get:
       tags:
@@ -61,7 +60,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetTicketResponse'
-
   /wegotourgetalluser:
     get:
       tags:
@@ -80,7 +78,6 @@ paths:
           description: Invalid username supplied
         '404':
           description: User not found
-
   /wegotour-registeradmin:
     post:
       tags:
@@ -102,7 +99,6 @@ paths:
                 $ref: '#/components/schemas/RegisterResponse'
         '405':
           description: Invalid input
-
   /wegotourchangepassworduser:
     put:
       tags:
@@ -128,7 +124,6 @@ paths:
         - Login:
           - write:apiKey
           - read:apiKey
-
  /wegotourdeletedataticket:
     delete:
       tags:
@@ -154,7 +149,6 @@ paths:
         - Login:
           - write:apiKey
           - read:apiKey
-
   /wegotourloginadminbaru:
     post:
       tags:
@@ -180,7 +174,6 @@ paths:
         - Login:
           - write:apiKey
           - read:apiKey
-
   /insertdataticket:
     post:
       tags:
@@ -209,7 +202,6 @@ paths:
 
 components:
   schemas:
-
     User:
       type: object
       properties:
@@ -222,7 +214,6 @@ components:
         password:
           type: string
           example: 
-
     GetTicketResponse:
       type: object
       properties:
@@ -234,7 +225,6 @@ components:
           example: berhasil ambil data
         data:
           $ref: "#/components/schemas/Auth"
-
     GetAllDataResponse:
       type: object
       properties:
@@ -246,7 +236,6 @@ components:
           example: berhasil ambil data
         data:
           $ref: "#/components/schemas/Auth"
-
     UpdatePenggunaResponse:
       type: object
       properties:
@@ -256,7 +245,6 @@ components:
         message:
           type: string
           example: successful operation
-
     RegisterResponse:
       type: object
       properties:
@@ -266,7 +254,6 @@ components:
         message:
           type: string
           example: user berhasil terdaftar
-
     Ticket:
       type: object
       properties:
@@ -282,7 +269,6 @@ components:
         image:
           type: string
           example: https://images3.alphacoders.com/165/thumb-1920-165265.jpg
-
     DeleteTicketResponse:
       type: object
       properties:
@@ -294,7 +280,6 @@ components:
           example: berhasil delete data
         data:
           $ref: "#/components/schemas/Auth"
-
     InsertDataResponse:
       type: object
       properties:
@@ -304,7 +289,6 @@ components:
         message:
           type: string
           example: successful operation
-
     ChangePassResponse:
       type: object
       properties:
@@ -314,7 +298,6 @@ components:
         message:
           type: string
           example: successful operation
-
     Auth:
       type: object
       properties:
@@ -324,7 +307,6 @@ components:
         password:
           type: string
           example: picaw
-
     AuthResponse:
       type: object
       properties:
@@ -337,7 +319,6 @@ components:
         token:
           type: string
           example: dapa
-
   requestBodies:
     AuthReq:
       description: Request Authentication
@@ -345,7 +326,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Auth'
-
     UserArray:
       description: List of user object
       content:
@@ -354,7 +334,6 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/AuthResponse'
-
   securitySchemes:
     Login:
       type: apiKey
