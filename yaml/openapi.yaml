@@ -46,6 +46,7 @@ tags:
       url: https://github.com/wegotour/PasetoBackend
 
 paths:
+
   /wegotour:
     get:
       tags:
@@ -65,7 +66,7 @@ paths:
     get:
       tags:
         - data
-      summary: Get all user
+      summary: Get all user without token
       description: Header Auth
       operationId: getdataallUser
       responses:
@@ -84,7 +85,7 @@ paths:
     post:
       tags:
         - register
-      summary: Register User
+      summary: Register User without token
       description: Register User
       operationId: authService
       requestBody:
@@ -102,59 +103,18 @@ paths:
         '405':
           description: Invalid input
 
-  /wegotour-updateUser:
-    put:
-      tags:
-        - update
-      summary: Update User
-      description: Update User
-      operationId: authService
-      parameters:
-        - name: ID
-          in: path
-          description: 'Masukkan ID user yang ingin di update.'
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UpdatePenggunaResponse'
-        '405':
-          description: Invalid input
-      security:
-        - Login:
-          - write:apiKey
-          - read:apiKey
-
-
   /wegotourchangepassworduser:
     put:
       tags:
         - update
-      summary: Change Password
+      summary: Change Password with token
       description: Change Password
       operationId: authService
-      parameters:
-        - name: username
-          in: path
-          description: 'Masukkan username user yang ingin di ganti passwordnya.'
-          required: true
-          schema:
-            type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: '#/components/schemas/Auth'
       responses:
         '200':
           description: successful operation
@@ -169,27 +129,25 @@ paths:
           - write:apiKey
           - read:apiKey
 
-  /wegotour-deletedataticket:
+ /wegotour-deletedataticket:
     delete:
       tags:
-        - Delete
-      summary: Delete Ticket
+        - delete
+      summary: Delete ticket with token
       description: Delete Ticket
       operationId: authService
-      parameters:
-        - name: ticket
-          in: path
-          description: 'Masukkan ticket yang ingin di hapus.'
-          required: true
-          schema:
-            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ticket'
       responses:
         '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetTicketResponse'
+                $ref: '#/components/schemas/DeleteTicketResponse'
         '405':
           description: Invalid input
       security:
@@ -226,7 +184,7 @@ paths:
   /insertdataticket:
     post:
       tags:
-        - Ticket
+        - ticket
       summary: Post Ticket
       description: Insert Ticket
       operationId: authService
@@ -251,15 +209,19 @@ paths:
 
 components:
   schemas:
+
     User:
       type: object
       properties:
         email:
           type: string
+          example: 
         username:
           type: string
+          example: 
         password:
           type: string
+          example: 
 
     GetTicketResponse:
       type: object
@@ -271,7 +233,7 @@ components:
           type: string
           example: berhasil ambil data
         data:
-          $ref: "#/components/schemas/Login"
+          $ref: "#/components/schemas/Auth"
 
     GetAllDataResponse:
       type: object
@@ -283,7 +245,7 @@ components:
           type: string
           example: berhasil ambil data
         data:
-          $ref: "#/components/schemas/Login"
+          $ref: "#/components/schemas/Auth"
 
     UpdatePenggunaResponse:
       type: object
@@ -308,7 +270,7 @@ components:
     Ticket:
       type: object
       properties:
-        nomomrid:
+        nomorid:
           type: string
           example: 20
         title:
@@ -320,6 +282,18 @@ components:
         image:
           type: string
           example: https://images3.alphacoders.com/165/thumb-1920-165265.jpg
+
+    DeleteTicketResponse:
+      type: object
+      properties:
+        status:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: berhasil delete data
+        data:
+          $ref: "#/components/schemas/Auth"
 
     InsertDataResponse:
       type: object
