@@ -104,25 +104,25 @@ paths:
                 $ref: '#/components/schemas/RegisterResponse'
         '405':
           description: Invalid input
-  /wegotourchangepassworduser:
+  /updatedataticket:
     put:
       tags:
         - update
-      summary: Change Password with token
-      description: Change Password
+      summary: Change Data Ticket with token
+      description: Change Data Ticket
       operationId: authService
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Auth'
+              $ref: '#/components/schemas/Ticket'
       responses:
         '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ChangePassResponse'
+                $ref: '#/components/schemas/ChangeDataTicketResponse'
         '405':
           description: Invalid input
       security:
@@ -295,7 +295,7 @@ components:
         message:
           type: string
           example: successful operation
-    ChangePassResponse:
+    ChangeDataTicketResponse:
       type: object
       properties:
         status:
