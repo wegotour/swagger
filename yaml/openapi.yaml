@@ -124,7 +124,7 @@ paths:
         - Login:
           - write:apiKey
           - read:apiKey
- /wegotourdeletedataticket:
+ /deletedataticket:
     delete:
       tags:
         - delete
