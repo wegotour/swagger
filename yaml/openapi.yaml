@@ -39,12 +39,11 @@ tags:
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://github.com/wegotour/PasetoBackend
-  - delete: delete
+  - name: delete
     description: Delete Data
     externalDocs:
       description: Deskripsi dan Kode Program
       url: https://github.com/wegotour/PasetoBackend
-
 paths:
   /wegotour:
     get:
