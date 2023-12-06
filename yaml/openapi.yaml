@@ -148,7 +148,7 @@ paths:
         - Login:
           - write:apiKey
           - read:apiKey
-  /wegotourloginadminbaru:
+  /wegotourloginadmin:
     post:
       tags:
         - auth
@@ -204,15 +204,18 @@ components:
     User:
       type: object
       properties:
-        email:
-          type: string
-          example: 
         username:
           type: string
-          example: 
+          example: cobainswaggers
         password:
           type: string
-          example: 
+          example: cobainswaggers
+        email:
+          type: string
+          example: cobainswaggers@gmail.com
+        role:
+          type: string
+          example: admin
     GetTicketResponse:
       type: object
       properties:
@@ -300,12 +303,18 @@ components:
     Auth:
       type: object
       properties:
-        email:
+        username:
           type: string
-          example: prisyahaura@gmail.com
+          example: prisyahaura
         password:
           type: string
           example: picaw
+        email:
+          type: string
+          example: prisyahaura@gmail.com
+        role:
+         type: string
+         example: admin
     AuthResponse:
       type: object
       properties:
