@@ -154,7 +154,7 @@ paths:
         - Login:
           - write:apiKey
           - read:apiKey
-  /wegotourloginadmin:
+  /wegotourloginadminbaru:
     post:
       tags:
         - auth
@@ -240,8 +240,6 @@ components:
         message:
           type: string
           example: berhasil ambil data
-        data:
-          $ref: "#/components/schemas/Auth"
     UpdatePenggunaResponse:
       type: object
       properties:
@@ -284,8 +282,6 @@ components:
         message:
           type: string
           example: berhasil delete data
-        data:
-          $ref: "#/components/schemas/Auth"
     InsertDataResponse:
       type: object
       properties:
