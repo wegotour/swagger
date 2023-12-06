@@ -129,7 +129,7 @@ paths:
           - write:apiKey
           - read:apiKey
 
- /wegotour-deletedataticket:
+ /wegotourdeletedataticket:
     delete:
       tags:
         - delete
