@@ -11,11 +11,11 @@ info:
     email: daffaaudyapramana03@gmail.com
   license:
     name: Wegotour Package
-    url: https://pkg.go.dev/github.com/wegotour/be_p3
+    url: https://pkg.go.dev/github.com/wegotour/PasetoBackend
   version: 0.0.4
 externalDocs:
   description: Repo GCF
-  url: https://wegotour.github.io/cloudfunction_wegotour/
+  url: https://github.com/wegotour/cloudfunction_wegotour
 servers:
   - url: https://asia-southeast2-wegotour-403712.cloudfunctions.net/
 tags:
@@ -83,11 +83,11 @@ paths:
           description: Invalid username supplied
         '404':
           description: User not found
-  /wegotour-registeradmin:
+  /wegotour-registersuperadmin:
     post:
       tags:
         - register
-      summary: Register User without token
+      summary: Register for get token
       description: Register User
       operationId: authService
       requestBody:
@@ -183,7 +183,7 @@ paths:
     post:
       tags:
         - ticket
-      summary: Post Ticket
+      summary: Post ticket with token
       description: Insert Ticket
       operationId: authService
       requestBody:
