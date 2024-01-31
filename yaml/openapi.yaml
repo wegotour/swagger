@@ -140,7 +140,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Ticket'
+              $ref: '#/components/schemas/Delete'
       responses:
         '200':
           description: successful operation
@@ -273,6 +273,12 @@ components:
         image:
           type: string
           example: https://unsplash.it/1200/900?random
+    Delete:
+      type: object
+      properties:
+        nomorid:
+          type: string
+          example: 2
     DeleteTicketResponse:
       type: object
       properties:
